@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import es.usj.sac.controller.Cost231HataController;
+import es.usj.sac.controller.OkumuraHataController;
 import es.usj.sac.util.SpringUtilities;
 
-public class Cost231HataModel extends JDialog {
+public class OkumuraHataModel extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -31,8 +31,8 @@ public class Cost231HataModel extends JDialog {
 
 	private JComboBox<String> environment;
 
-	public Cost231HataModel(JFrame parent) {
-		super(parent, "COST231-Hata model", true);
+	public OkumuraHataModel(JFrame parent) {
+		super(parent, "Okumura-Hata model", true);
 		this.setSize(310, 210);
 		this.setLocation(parent.getX() + 300, parent.getY());
 
@@ -127,7 +127,7 @@ public class Cost231HataModel extends JDialog {
 
 		String area = (String) environment.getSelectedItem();
 
-		String result = Cost231HataController.predict(f, d, hb, hm, area).replace(',', '.');
+		String result = OkumuraHataController.predict(f, d, hb, hm, area).replace(',', '.');
 
 		return (Double.parseDouble(result) == 0) ? "Out of range" : result;
 	}

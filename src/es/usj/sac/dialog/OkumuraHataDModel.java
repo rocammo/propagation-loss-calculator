@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import es.usj.sac.controller.Cost231HataController;
+import es.usj.sac.controller.OkumuraHataDController;
 import es.usj.sac.util.SpringUtilities;
 
-public class Cost231HataModel extends JDialog {
+public class OkumuraHataDModel extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -24,15 +24,15 @@ public class Cost231HataModel extends JDialog {
 	private JLabel label;
 
 	private JTextField carrierFrequency;
-	private JTextField distance;
+	private JTextField attenuation;
 	private JTextField txAntHeight;
 	private JTextField rxAntHeight;
 	private JLabel result;
 
 	private JComboBox<String> environment;
 
-	public Cost231HataModel(JFrame parent) {
-		super(parent, "COST231-Hata model", true);
+	public OkumuraHataDModel(JFrame parent) {
+		super(parent, "Okumura-Hata model (distance)", true);
 		this.setSize(310, 210);
 		this.setLocation(parent.getX() + 300, parent.getY());
 
@@ -54,17 +54,17 @@ public class Cost231HataModel extends JDialog {
 		label.setLabelFor(carrierFrequency);
 		panel.add(carrierFrequency);
 
-		// Distance
-		label = new JLabel("Distance: ", JLabel.TRAILING);
+		// Attenuation
+		label = new JLabel("Attenuation: ", JLabel.TRAILING);
 		panel.add(label);
-		distance = new JTextField(10);
-		distance.addKeyListener(new KeyAdapter() {
+		attenuation = new JTextField(10);
+		attenuation.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				result.setText(predict());
 			}
 		});
-		label.setLabelFor(distance);
-		panel.add(distance);
+		label.setLabelFor(attenuation);
+		panel.add(attenuation);
 
 		// Tx ant. height
 		label = new JLabel("Tx ant. height: ", JLabel.TRAILING);
@@ -104,7 +104,7 @@ public class Cost231HataModel extends JDialog {
 		panel.add(environment);
 
 		// Result
-		label = new JLabel("Attenuation: ", JLabel.TRAILING);
+		label = new JLabel("Distance: ", JLabel.TRAILING);
 		panel.add(label);
 		result = new JLabel(predict());
 		label.setLabelFor(result);
@@ -115,19 +115,19 @@ public class Cost231HataModel extends JDialog {
 	}
 
 	private String predict() {
-		if (carrierFrequency.getText().isEmpty() || distance.getText().isEmpty() || txAntHeight.getText().isEmpty()
+		if (carrierFrequency.getText().isEmpty() || attenuation.getText().isEmpty() || txAntHeight.getText().isEmpty()
 				|| rxAntHeight.getText().isEmpty()) {
 			return "";
 		}
 
 		double f = Double.parseDouble(carrierFrequency.getText());
-		double d = Double.parseDouble(distance.getText());
+		double lb = Double.parseDouble(attenuation.getText());
 		double hb = Double.parseDouble(txAntHeight.getText());
 		double hm = Double.parseDouble(rxAntHeight.getText());
 
 		String area = (String) environment.getSelectedItem();
 
-		String result = Cost231HataController.predict(f, d, hb, hm, area).replace(',', '.');
+		String result = OkumuraHataDController.predict(f, lb, hb, hm, area).replace(',', '.');
 
 		return (Double.parseDouble(result) == 0) ? "Out of range" : result;
 	}

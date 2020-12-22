@@ -13,7 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import es.usj.sac.dialog.Cost231HataDModel;
 import es.usj.sac.dialog.Cost231HataModel;
+import es.usj.sac.dialog.OkumuraHataDModel;
+import es.usj.sac.dialog.OkumuraHataModel;
 
 public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -76,7 +79,9 @@ public class Window extends JFrame {
 		okumuraHata.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO
+				LOGGER.log(Level.INFO, okumuraHata.getText() + " clicked!");
+				OkumuraHataModel okumuraHataModel = new OkumuraHataModel(frame);
+				okumuraHataModel.setVisible(true);
 			}
 		});
 
@@ -86,7 +91,9 @@ public class Window extends JFrame {
 		cost231HataD.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO
+				LOGGER.log(Level.INFO, cost231HataD.getText() + " clicked!");
+				Cost231HataDModel cost231HataDModel = new Cost231HataDModel(frame);
+				cost231HataDModel.setVisible(true);
 			}
 		});
 
@@ -96,7 +103,9 @@ public class Window extends JFrame {
 		okumuraHataD.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO
+				LOGGER.log(Level.INFO, okumuraHataD.getText() + " clicked!");
+				OkumuraHataDModel okumuraHataDModel = new OkumuraHataDModel(frame);
+				okumuraHataDModel.setVisible(true);
 			}
 		});
 
