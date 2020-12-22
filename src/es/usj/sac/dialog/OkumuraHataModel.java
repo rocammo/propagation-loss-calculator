@@ -129,6 +129,6 @@ public class OkumuraHataModel extends JDialog {
 
 		String result = OkumuraHataController.predict(f, d, hb, hm, area).replace(',', '.');
 
-		return (Double.parseDouble(result) == 0) ? "Out of range" : result;
+		return (Double.parseDouble(result) == 0) ? "Out of range" : result + " dB";
 	}
 }

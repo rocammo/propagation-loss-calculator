@@ -129,6 +129,6 @@ public class Cost231HataModel extends JDialog {
 
 		String result = Cost231HataController.predict(f, d, hb, hm, area).replace(',', '.');
 
-		return (Double.parseDouble(result) == 0) ? "Out of range" : result;
+		return (Double.parseDouble(result) == 0) ? "Out of range" : result + " dB";
 	}
 }
